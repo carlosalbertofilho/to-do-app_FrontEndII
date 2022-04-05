@@ -30,12 +30,13 @@ signupButtonRef.addEventListener('click', event => {
     }
             
 
-    fetch('https://ctd-todo-api.herokuapp.com/users', requestManager ).then(
+    fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestManager ).then(
 
     response => {
         response.json().then(
             data => {
                 console.log(data)
+                
             }
         )
     }     

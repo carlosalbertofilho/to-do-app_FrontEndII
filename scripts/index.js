@@ -4,7 +4,11 @@ let submitReference = document.querySelector('#submit')
 
 submitReference.addEventListener('click',function(event){
 
-inputEmailReference = inputEmailReference.value
+    event.preventDefault()
+
+
+
+    fetch('https://ctd-todo-api.herokuapp.com/v1/)
 
 
 

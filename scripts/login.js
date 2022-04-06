@@ -39,16 +39,23 @@ loginButtonRef.addEventListener('click', event => {
 
         response => {
 
+            if (response.ok){
             response.json().then(
 
                 data => {
 
                     localStorage.setItem('token', data.jwt)
+                    window.location.href = './tarefas.html'
                     
 
                 }
 
             )
+            }else{
+
+                alert('Usuário incorreto')
+
+            }
 
         }
 

@@ -1,11 +1,39 @@
+
+
+//Reference
 let inputEmailRef = document.getElementById('inputEmail')
 let inputPasswordRef = document.getElementById('inputPassword')
 let loginButtonRef = document.querySelector('#loginButton')
+let userSuccessRef = document.getElementById('userSuccess')
+let errorEmailRef = document.getElementById('errorEmail')
+let errorPasswordRef = document.getElementById('errorPassword')
+let errorConfig = []
+
+
+//Error
+
+function errorUserEmail(){
+    if (inputEmailRef.value == ""){
+        errorEmailRef.innerText = 'campo email deve ser preenchido'
+        errorConfig.push('Email')
+    }else {
+    }
+}
+function errorUserPassword(){
+    if (inputPasswordRef.value == ""){
+        errorPasswordRef.innerText = 'campo senha deve ser preenchido'
+        errorConfig.push('Password')
+    }else {
+    }
+}
 
 loginButtonRef.addEventListener('click', event => {
 
     event.preventDefault()
 
+    errorUserEmail()
+            
+    errorUserPassword()
    
 
     let credentials = {
@@ -34,11 +62,12 @@ loginButtonRef.addEventListener('click', event => {
     }
 
   
-
-    fetch('https://ctd-todo-api.herokuapp.com/v1/users/login', requestConfiguration).then(
+    function errorMaster(){
+        if (errorConfig.length == []){
+        fetch('https://ctd-todo-api.herokuapp.com/v1/users/login', requestConfiguration).then(
 
         response => {
-
+            console.log(response)
             if (response.ok){
             response.json().then(
 
@@ -47,18 +76,26 @@ loginButtonRef.addEventListener('click', event => {
                     localStorage.setItem('token', data.jwt)
                     window.location.href = './tarefas.html'
                     
-
+                    
                 }
+                
+                )
+            }else if(response.status > 300 || response.status < 200){
+                
+                
+                userSuccessRef.innerText = 'Usuário ou senha incorreto'
 
-            )
             }else{
 
-                alert('Usuário incorreto')
-
             }
-
+            
         }
-
-    )
-
+        
+        )
+    }else {
+        errorConfig = []
+    }
+    
+}
+    errorMaster()
 })

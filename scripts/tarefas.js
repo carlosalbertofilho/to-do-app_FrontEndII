@@ -1,9 +1,17 @@
 function logOutUser(){
 
-    localStorage.clear()
-    window.location.href = './index.html'
+localStorage.clear()
+window.location.href = './index.html'
 
 }
+
+if(localStorage.getItem('token') === 'undefined'){
+
+    window.location.href = './index.html'
+
+}else{
+    
+    
 
 let requestConfiguration = {
 
@@ -44,7 +52,11 @@ fetch('https://ctd-todo-api.herokuapp.com/v1/users/getMe', requestConfiguration)
 
 fetch('https://ctd-todo-api.herokuapp.com/v1/tasks', requestConfiguration).then(
     response => {
-        console.log(response)
+
+        response.json().then(
+            tasks => 
+            console.log(tasks)   
+        )
     }
 )
-
+}

@@ -55,6 +55,11 @@ label {
   font-size: .8em;
 }
 
+.error{
+  color: red;
+  font-size: 10;
+}
+
 button {
   padding: .5em 3em;
   background-color: var(--primary);
@@ -62,6 +67,12 @@ button {
   margin-top: 2em;
   font-weight: 400;
   font-size: 1em;
+}
+
+.msgSuccess {
+
+  text-align: center;
+
 }
 
 .form-header {

@@ -19,11 +19,10 @@
   <!-- CDN example (unpkg) -->
   <!-- <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script> -->
 
-  <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+  <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.jsubmitTasks"></script> -->
 
-  <script src="scripts/tarefas.js"></script>
-
-
+  
+  
   <title>To-Do App</title>
 </head>
 
@@ -32,7 +31,7 @@
     <nav>
       <a href="#">Tarefas</a>
     </nav>
-
+    
     <div class="user-info">
       <p>Nome usuário</p>
       <div class="user-image"></div>
@@ -40,18 +39,19 @@
       </p>
     </div>
   </header>
-
-
+  
+  
   <form class="nova-tarefa">
     <div class="not-done "></div>
-    <input id="novaTarea" type="text" placeholder="Nova tarefa">
-    <button type="submit">
+    <input id="newTask" type="text" placeholder="Nova tarefa">
+    <button id="submitTask" type="submit">
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>
 
 
   <ul class="tarefas-pendentes">
+    <div id="tarefas"></div> 
     <div id="skeleton">
       <li class="tarefa">
         <div class="not-done"></div>
@@ -82,7 +82,9 @@
   <ul class="tarefas-terminadas">
 
   </ul>
-
+  
+  <script src="scripts/tarefas.js"></script>
+  
 </body>
 
 </html>

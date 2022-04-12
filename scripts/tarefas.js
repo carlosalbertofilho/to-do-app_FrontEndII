@@ -2,6 +2,7 @@
 let newTaskRef = document.getElementById('newTask')
 let submitTaskRef = document.querySelector('#submitTask')
 let skeletonRef = document.getElementById('skeleton')
+let tasksRef = document.getElementById('tasks')
 
 
 
@@ -104,24 +105,65 @@ submitTaskRef.addEventListener('click', event => {
         }
     }
 
-    function listTask(objectRef, dados){
+    function changeCompleted(id){
+    
+      let header = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+    }
 
-        objectRef.innerHTML =  `<li class="tarefa">
-        <div class="not-done"></div>
-        <div class="descricao">
-          <p class="nome">${dados.description}</p>
-          <p class="timestamp">${dados.createdAt}</p>`
+    let objectBody = {
+        
+        "completed": true
+    } 
+    
+    let requestManager = {
+        
+        method: 'PUT',
+        body: JSON.stringify(objectBody),
+        headers: header 
+        
+    }
+    
+    fetch(`https://ctd-todo-api.herokuapp.com/v1/tasks/{id}`, requestManager).then(
+        response => {
+    
+            response.json().then(
+                tasks => 
+                console.log(tasks)   
+            )
+        }
+    )          
+    
+    }
+    
+    function listTask(objectRef, dados){
+        
+        dados.forEach(dado => {
+            
+            const options = {day: '2-digit', month: '2-digit', year: 'numeric'}
+            const dateFormated = new Date(dado.createdAt).toLocaleDateString('pt-BR', options)
+            objectRef.innerHTML +=  `<li class="tarefa">
+            <div class="not-done" onclick="changeCompleted(dado.id)"></div>
+            <div class="descricao">
+              <p class="nome">${dado.description}</p>
+              <p class="timestamp">${dateFormated}</p>`
+
+        });
 
 
     }
-
+    
     fetch('https://ctd-todo-api.herokuapp.com/v1/tasks', requestTaskConfig).then(
         response => {
             
             skeletonRef.style.display = "none"   
             response.json().then(
-                tasks => 
-               listTask(skeletonRef, tasks)
+                tasks => {
+                    
+                    listTask(tasksRef, tasks)
+                    
+                }
             )
         }
     )

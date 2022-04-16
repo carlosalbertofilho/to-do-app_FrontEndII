@@ -244,15 +244,23 @@ function getTasks(){
 
 //Confirm Delete
 function confirmDelete(deleteId){
-
-    confirm('Do you really want delete this task?')
-    if (confirm){
-        deleteTask(deleteId)
-    }else{
-
+ 
+    Swal.fire({
+        title: 'Do you really want delete this task?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            deleteTask(deleteId)
+          )
+        }
+      })
     }
-
-}
 
 
 //Delete Task
@@ -282,5 +290,3 @@ function deleteTask(id){
             )          
             
         }
-
-        

@@ -44,7 +44,7 @@
   <form class="nova-tarefa">
     <div class="not-done "></div>
     <input id="newTask" type="text" placeholder="Nova tarefa">
-    <button id="submitTask" type="submit">
+    <button id="submitTask" type="submit" disabled>
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>
@@ -58,6 +58,7 @@
         <div class="descricao">
           <p class="nome">Nova tarefa</p>
           <p class="timestamp">Criada em: 15/07/21</p>
+          <button src="assets/trash.png" type="submit"onclick="deleteTask(${task.id})"></button>
         </div>
       </li>
       <li class="tarefa">
@@ -65,7 +66,7 @@
         <div class="descricao">
           <p class="nome">Nova tarefa</p>
           <p class="timestamp">Criada em: 15/07/21</p>
-        </div>
+          </div>
       </li>
       <li class="tarefa">
         <div class="not-done"></div>

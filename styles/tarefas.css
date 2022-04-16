@@ -44,6 +44,12 @@ a {
   border-radius: 50vh;
   padding: 5px 10px;
   cursor: pointer;
+  opacity: 0.5;
+}
+
+#closeApp:hover{
+  opacity: 1;
+
 }
 
 /* Nova tarefa ----------------------------------------------------------- */
@@ -86,12 +92,13 @@ a {
   background-color: transparent;
   margin-left: 2em;
   margin-right: 1em;
-  opacity: .5;
+  opacity: 0.2;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .nova-tarefa button:hover {
-  opacity: 1;
+  background-color: green;
 }
 
 .nova-tarefa button img {
@@ -182,6 +189,14 @@ a {
   color: rgb(134, 134, 134);
 }
 
+
+.deleteBtn{
+  opacity: 0.5;
+}
+
+.deleteBtn:hover{
+  opacity: 1;
+}
 /* Tarefas terminadas ----------------------------------------------------------- */
 
 .titulo-terminadas {

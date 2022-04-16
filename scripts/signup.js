@@ -88,8 +88,6 @@ signupButtonRef.addEventListener('click', event => {
             errorUserRePassword()
             
             errorUserRePasswordDifferent()
-
-            // errorMaster()
             
             let header = {
                 'Content-Type': 'application/json'

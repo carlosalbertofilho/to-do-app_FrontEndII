@@ -205,7 +205,7 @@ function getTasks(){
                     
                             tasksFinishedRef.innerHTML +=  `
                             <li class="tarefa">
-                            <div class="not-done" onclick="updateTask(${task.id}, false)"></div>
+                            <div class="not-done" onclick="updateTask(${task.id}, false)"><img src="./assets/return.png" alt="Tarefa terminada"></div>
                             <div class="descricao">
                             <p class="nome">${task.description}</p>
                             <p class="timestamp">Created in: ${dateFormated}</p>
@@ -221,7 +221,9 @@ function getTasks(){
                     
                             tasksRef.innerHTML +=  `
                             <li class="tarefa">
-                            <div class="not-done" onclick="updateTask(${task.id},true)"></div>
+                            <div class="not-done" onclick="updateTask(${task.id},true)">
+                            <img src="./assets/finished.png" alt="Tarefa terminada">
+                            </div>
                             <div class="descricao">
                             <p class="nome">${task.description}</p>
                             <p class="timestamp">Created in: ${dateFormated}</p>

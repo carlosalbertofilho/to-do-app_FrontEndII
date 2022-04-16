@@ -144,6 +144,11 @@ a {
   transition: background-color 200ms linear;
 }
 
+.tarefa .not-done img{
+  height: 87%;
+  margin-top: 1px;
+}
+
 .tarefa .not-done:hover {
   background-color: var(--secondary);
 }

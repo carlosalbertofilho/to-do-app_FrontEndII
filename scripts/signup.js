@@ -117,7 +117,13 @@ signupButtonRef.addEventListener('click', event => {
                         
                         response => {
                             if (response.status >= 200 && response.status < 300){
-                                userSuccessRef.innerText = 'Usuário cadastrado com Sucesso'
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your user has been saved',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                  })
 
                             }else{
 

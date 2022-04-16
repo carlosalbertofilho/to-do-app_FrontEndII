@@ -27,12 +27,12 @@ a {
   text-transform: capitalize;
 }
 
-.user-info .user-image {
-  height: 2em;
-  width: 2em;
+.user-info .user-image img{
+  height: 2.5em;
+  width: 2.5em;
   border-radius: 50%;
   background-color: white;
-  opacity: .4;
+  opacity: 1;
   margin-left: .7em;
 }
 

@@ -5,6 +5,7 @@ let skeletonRef = document.getElementById('skeleton')
 let tasksRef = document.getElementById('tasks')
 let tasksFinishedRef = document.getElementById('tasksFinished')
 let closeAppRef = document.getElementById('closeApp')
+let imageUserRef = document.getElementById('imageUser')
 
 
 
@@ -292,3 +293,21 @@ function deleteTask(id){
             )          
             
         }
+
+//Reference image user
+
+function getImage(data){
+
+    imageUserRef.src = data.picture.thumbnail
+
+}
+
+//Random image
+fetch('https://randomuser.me/api/')
+    .then(response =>{
+        return response.json()
+            .then(data=> {
+                getImage(data.results[0])
+                console.log(data)
+            })
+    })

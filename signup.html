@@ -11,16 +11,13 @@
   <link rel="stylesheet" href="styles/acesso.css">
 
    <!-- ----------------------------- sweet alert ----------------------------- -->
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   <script src="sweetalert2.all.min.js"></script>
-  
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
   <!-- ---------------------- lógica aplicada no registro -------------------- -->
-  
 </head>
 
 <body>
-  
   <div class="left">
     <img src="./assets/pessoa-signup.png" alt="">
   </div>
@@ -29,36 +26,32 @@
       <div class="form-header">
         <p>To-Do App</p>
       </div>
-      
       <label>
         Nome:
-        <input id="userName" type="text">
-        <p id="errorName" class="error"></p>
+        <input id="userName" pattern="[a-zA-Z0-9]{2,}" maxlength="12" type="text" required>
+        <span aria-live="polite" hidden>Este campo é obrigatório</span>
       </label>
       <label>
         Sobrenome:
-        <input id="userLastName" type="text">
-        <p id="errorLastName" class="error"></p>
+        <input id="userLastName" pattern="[a-zA-Z0-9]{2,}" maxlength="12" type="text" required>
+        <span aria-live="polite" hidden>Este campo é obrigatório</span>
       </label>
       <label>
         Email:
-        <input id="userEmail" type="text">
-        <p id="errorEmail" class="error"></p>
+        <input id="userEmail" type="email" required>
+        <span aria-live="polite" hidden>Por favor insira um endereço de email válido</span>
       </label>
       <label>
         Senha:
-        <input id="userPassword" type="password">
-        <p id="errorPassword" class="error"></p>
+        <input id="userPassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" maxlength="12" required>
+        <span  aria-live="polite" hidden>Sua senha precisa ter entre 6 e 12 caracteres e conter uma letra maiúscula, uma letra minúscula e um número</span>
       </label>
       <label>
         Repetir senha:
-        <input id="userRePassword" type="password">
-        <p id="errorRePassword"  class="error"></p>
+          <input id="userRePassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" maxlength="12" required>
+          <span aria-live="polite" hidden>Repita sua senha</span>
       </label>
-      
-      <button id="signupButton">Criar conta</button>
-      <p class="msgSuccess" id="userSuccess"></p>
-      
+      <button id="signupButton" disabled>Criar conta</button>
     </form>
     <div class="ingressar">
       <a href="index.html">Já possui conta? Acesse aqui</a>
@@ -66,7 +59,6 @@
   </div>
   <!-- <script src="scripts/utils.js"></script> -->
   <script src="scripts/signup.js"></script>
-  
 </body>
 
 </html>

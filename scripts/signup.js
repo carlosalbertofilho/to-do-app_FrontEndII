@@ -1,157 +1,90 @@
-/* hint esversion: 6 */
-function selectId(id) {
-    return document.getElementById(id);
-}
+/* jshint esversion: 8 */
+// Reference
+const inputsReference = document.querySelectorAll('input');
+const spanReference = document.querySelectorAll('span');
+const signupButtonRef = document.getElementById('signupButton');
 
-//Reference
-let userNameRef = selectId('userName')
-let userLastNameRef = selectId('userLastName')
-let userEmailRef = selectId('userEmail')
-let userPasswordRef = selectId('userPassword')
-let userRePasswordRef = selectId('userRePassword')
-let signupButtonRef = selectId('signupButton')
-let userSuccessRef = selectId('userSuccess')
+// Check if can be submit form
+const canBeSubmit = () => {
+    let submit = false;
+    inputsReference.forEach(input => {
+        submit = input.validity.valid;
+    });
+    if (submit)
+        signupButtonRef.disabled = false;
+};
 
-//Reference Error
-let errorNameRef = selectId('errorName')
-let errorLastNameRef = selectId('errorLastName')
-let errorEmailRef = selectId('errorEmail')
-let errorPasswordRef = selectId('errorPassword')
-let errorRePasswordRef = selectId('errorRePassword')
-let errorConfig = []
 
-//Error
+// Check validity rule form
+const validityForm = () => {
+    // input validation
+    inputsReference.forEach((input, index) => {
+        input.addEventListener('keyup', event => {
+            if (!input.validity.valid) {
+                spanReference[index].className = "error";
+                spanReference[index].removeAttribute("hidden");
+            } else {
+                spanReference[index].setAttribute("hidden", "hidden");
+            }
+            if (index == 4 && input.value.length > 5 && input.value != inputsReference[3].value) {
+                spanReference[index].innerText = "As senhas não coincidem";
+            } else
+                canBeSubmit();
+        });
+    });
+};
 
-function errorUserName(){
-    if (userNameRef.value == ""){
-        errorNameRef.innerText = 'campo nome deve ser preenchido'
-        errorConfig.push('Name')
-    }else {
-    }
-}
+const userOk = () => {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Usuário cadastrado com sucesso!',
+        showConfirmButton: false,
+        timer: 1500
+    });
+};
 
-function errorUserLastName(){
-    if (userLastNameRef.value == ""){
-        errorLastNameRef.innerText = 'campo sobrenome deve ser preenchido'
-        errorConfig.push('LastName')
-    }else {
-    }
-}
+const userError = () => {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Ops..!',
+        text: 'Não foi possível cadastrar o usuário tente novamente!',
+        showConfirmButton: false,
+        timer: 2500
+    });
+};
 
-function errorUserEmail(){
-    if (userEmailRef.value == ""){
-        errorEmailRef.innerText = 'campo email deve ser preenchido'
-        errorConfig.push('Email')
-    }else {
-    }
-}
 
-function errorUserPassword(){
-    if (userPasswordRef.value == ""){
-        errorPasswordRef.innerText = 'campo senha deve ser preenchido'
-        errorConfig.push('Password')
-    }else {
-    }
-}
+// Send Sign-up
+async function sendSignUp(object) {
+    const header = {
+        'Content-Type': 'application/json'
+    };
+    const objectBody = {
+        "firstName": object[0].value,
+        "lastName": object[1].value,
+        "email": object[2].value,
+        "password": object[3].value
+    };
+    const requestManager = {
+        method: 'POST',
+        body: JSON.stringify(objectBody),
+        headers: header
+    };
+    return fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestManager)
+        .then(T => T.json());
+};
 
-function errorUserRePassword(){
-    if (userRePasswordRef.value == ""){
-        errorRePasswordRef.innerText = 'campo repetir senha deve ser preenchido'
-        errorConfig.push('RePassword')
-    }else {
-    }
-}
 
-function errorUserRePasswordDifferent(){
-    if (userPasswordRef.value !== userRePasswordRef.value){
-        errorRePasswordRef.innerText = 'campo repetir senha não confere com a senha'
-        errorConfig.push('DifPassword')
-    }else {
-    }
-}
-
-console.log(errorConfig)
-
-//Events
+validityForm();
 signupButtonRef.addEventListener('click', event => {
-    
-    event.preventDefault()
-    
-            errorUserName()
-        
-            errorUserLastName()
-            
-            errorUserEmail()
-            
-            errorUserPassword()
-            
-            errorUserRePassword()
-            
-            errorUserRePasswordDifferent()
-            
-            let header = {
-                'Content-Type': 'application/json'
-            }
-            
-            let objectBody = {
-                "firstName": userNameRef.value,
-                "lastName": userLastNameRef.value,
-                "email": userEmailRef.value,
-                "password": userPasswordRef.value
-            } 
-            
-            let requestManager = {
-                
-                method: 'POST',
-                body: JSON.stringify(objectBody),
-                headers: header 
-                
-            }
-
-            
-            
-            function errorMaster(){
-                if (errorConfig.length == []){
-                    console.log(errorConfig)
-                    fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestManager ).then(
-                        
-                        response => {
-                            if (response.status >= 200 && response.status < 300){
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Your user has been saved',
-                                    showConfirmButton: false,
-                                    timer: 2500
-                                  })
-
-                            }else{
-
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'error',
-                                    title: 'Your user has not been saved, try again',
-                                    showConfirmButton: false,
-                                    timer: 2500
-                                  })
-                            }
-                            response.json().then(
-                                data => {
-                                    
-                                }
-                                          
-                            )
-                        }
-                    )
-                }else {
-                   errorConfig = []
-                }
-            }
-            errorMaster()
-            
-            
-            
-        }) 
-        
-
-// }
+    event.preventDefault();
+    sendSignUp(inputsReference)
+        .then(data => {
+            userOk();
+            localStorage.setItem('token', data.jwt);
+            window.location.href = './tarefas.html';
+        })
+        .catch(() => userError());
+});

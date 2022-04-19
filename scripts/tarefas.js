@@ -205,14 +205,14 @@ function getTasks(){
                             
                     
                             tasksFinishedRef.innerHTML +=  `
-                            <li class="tarefa">
+                            <li class="tarefa" data-aos="fade-up">
                             <div class="not-done" onclick="updateTask(${task.id}, false)"><img src="./assets/return.png" alt="Tarefa terminada"></div>
                             <div class="descricao">
                             <p class="nome">${task.description}</p>
                             <p class="timestamp">Created in: ${dateFormated}</p>
                             <button class="deleteBtn" type="submit"onclick="confirmDelete(${task.id})">
                             <img src="./assets/trash.png" alt="Excluir tarefa">
-                            </button>                            
+                            </button>                           
                             </div>
                             </li>
                             `
@@ -221,7 +221,7 @@ function getTasks(){
                                         
                     
                             tasksRef.innerHTML +=  `
-                            <li class="tarefa">
+                            <li class="tarefa" data-aos="fade-up">
                             <div class="not-done" onclick="updateTask(${task.id},true)">
                             <img src="./assets/finished.png" alt="Tarefa terminada">
                             </div>

@@ -83,7 +83,13 @@ loginButtonRef.addEventListener('click', event => {
             }else if(response.status > 300 || response.status < 200){
                 
                 
-                userSuccessRef.innerText = 'Usuário ou senha incorreto'
+                Swal.fire({
+                    position: 'top',
+                    icon: 'error',
+                    title: 'Your user or your password have been incorrect',
+                    showConfirmButton: false,
+                    timer: 2500
+                  })
 
             }else{
 

@@ -122,13 +122,18 @@ signupButtonRef.addEventListener('click', event => {
                                     icon: 'success',
                                     title: 'Your user has been saved',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 2500
                                   })
 
                             }else{
 
-                                userSuccessRef.innerText = 'Não foi possível cadastrar o usuário tente novamente'
-
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Your user has not been saved, try again',
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                  })
                             }
                             response.json().then(
                                 data => {

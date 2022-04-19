@@ -118,7 +118,7 @@ signupButtonRef.addEventListener('click', event => {
                         response => {
                             if (response.status >= 200 && response.status < 300){
                                 Swal.fire({
-                                    position: 'top-end',
+                                    position: 'top-center',
                                     icon: 'success',
                                     title: 'Your user has been saved',
                                     showConfirmButton: false,
@@ -128,7 +128,7 @@ signupButtonRef.addEventListener('click', event => {
                             }else{
 
                                 Swal.fire({
-                                    position: 'top-end',
+                                    position: 'top-center',
                                     icon: 'error',
                                     title: 'Your user has not been saved, try again',
                                     showConfirmButton: false,

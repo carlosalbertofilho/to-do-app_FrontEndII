@@ -75,9 +75,9 @@ loginButtonRef.addEventListener('click', event => {
     event.preventDefault();
     sendLogin(inputsReference)
         .then(data => {
-            setTimeout(() => userOk(), 3000);
+            userOk();
             localStorage.setItem('token', data.jwt);
-            window.location.href = './tarefas.html';
+            setTimeout(() => window.location.href = './tarefas.html', 3500);
         })
         .catch(() => userError('Algo de errado não está certo!'));
 });

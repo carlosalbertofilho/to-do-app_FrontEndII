@@ -73,7 +73,7 @@ async function sendSignUp(object) {
         headers: header
     };
     return fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestManager)
-        .then(T => T.json());
+        .then(T => T.ok ? T.json() : Promise.reject(new Error(T.status)));
 }
 
 

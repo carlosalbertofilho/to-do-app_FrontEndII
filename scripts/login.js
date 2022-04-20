@@ -39,12 +39,12 @@ const userOk = () => {
     });
 };
 
-const userError = () => {
+const userError = msg => {
     Swal.fire({
         position: 'top-end',
         icon: 'error',
         title: 'Ops..!',
-        text: 'Algo de errado não está certo!',
+        text: msg,
         showConfirmButton: false,
         timer: 3500
     });
@@ -67,7 +67,8 @@ async function sendLogin(object) {
         headers: requestHeaders
     };
     return fetch('https://ctd-todo-api.herokuapp.com/v1/users/login', requestConfiguration)
-        .then(T => T.json());
+        .then(T => T.ok ? T.json() : Promise.reject(new Error(T.status)));
+
 }
 validityLogin();
 loginButtonRef.addEventListener('click', event => {
@@ -78,7 +79,5 @@ loginButtonRef.addEventListener('click', event => {
             localStorage.setItem('token', data.jwt);
             window.location.href = './tarefas.html';
         })
-        .catch(error => {
-            userError();
-        });
+        .catch(() => userError('Algo de errado não está certo!'));
 });

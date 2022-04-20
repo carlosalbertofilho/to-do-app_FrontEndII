@@ -40,7 +40,7 @@ const userOk = () => {
         icon: 'success',
         title: 'Usuário cadastrado com sucesso!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 5500
     });
 };
 
@@ -51,7 +51,7 @@ const userError = () => {
         title: 'Ops..!',
         text: 'Não foi possível cadastrar o usuário tente novamente!',
         showConfirmButton: false,
-        timer: 2500
+        timer: 3500
     });
 };
 
@@ -74,7 +74,7 @@ async function sendSignUp(object) {
     };
     return fetch('https://ctd-todo-api.herokuapp.com/v1/users', requestManager)
         .then(T => T.json());
-};
+}
 
 
 validityForm();

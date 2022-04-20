@@ -1,107 +1,84 @@
-
-
+/* jshint esversion: 8 */
 //Reference
-let inputEmailRef = document.getElementById('inputEmail')
-let inputPasswordRef = document.getElementById('inputPassword')
-let loginButtonRef = document.querySelector('#loginButton')
-let userSuccessRef = document.getElementById('userSuccess')
-let errorEmailRef = document.getElementById('errorEmail')
-let errorPasswordRef = document.getElementById('errorPassword')
-let errorConfig = []
+const inputsReference = document.querySelectorAll('input');
+const spanReference = document.querySelectorAll('span');
+const loginButtonRef = document.querySelector('#loginButton');
 
+// Check if can be submit form
+const canBeSubmit = () => {
+    let submit = false;
+    inputsReference.forEach(input => {
+        submit = input.validity.valid;
+    });
+    if (submit)
+        loginButtonRef.disabled = false;
+};
 
-//Error
+// Check validity rules
+const validityLogin = () => {
+    inputsReference.forEach((input, index) => {
+        input.addEventListener('keyup', event => {
+            if (!input.validity.valid) {
+                spanReference[index].className = "error";
+                spanReference[index].removeAttribute("hidden");
+            } else {
+                spanReference[index].setAttribute("hidden", "hidden");
+            }
+            if (index == 1) canBeSubmit();
+        });
+    });
+};
 
-function errorUserEmail(){
-    if (inputEmailRef.value == ""){
-        errorEmailRef.innerText = 'campo email deve ser preenchido'
-        errorConfig.push('Email')
-    }else {
-    }
-}
-function errorUserPassword(){
-    if (inputPasswordRef.value == ""){
-        errorPasswordRef.innerText = 'campo senha deve ser preenchido'
-        errorConfig.push('Password')
-    }else {
-    }
-}
+const userOk = () => {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seja bem-vindo!',
+        showConfirmButton: false,
+        timer: 5500
+    });
+};
 
-loginButtonRef.addEventListener('click', event => {
+const userError = () => {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Ops..!',
+        text: 'Algo de errado não está certo!',
+        showConfirmButton: false,
+        timer: 3500
+    });
+};
 
-    event.preventDefault()
+// Send Login
+async function sendLogin(object) {
+    const credentials = {
+        "email": object[0].value,
+        "password": object[1].value
+    };
 
-    errorUserEmail()
-            
-    errorUserPassword()
-   
-
-    let credentials = {
-
-        email:inputEmailRef.value ,
-        password:inputPasswordRef.value 
-
-    }
-
-    
-
-    let requestHeaders = {
-
+    const requestHeaders = {
         'Content-Type': 'application/json'
+    };
 
-    }
-
-   
-
-    let requestConfiguration = {
-
+    const requestConfiguration = {
         method: 'POST',
         body: JSON.stringify(credentials),
         headers: requestHeaders
-
-    }
-
-  
-    function errorMaster(){
-        if (errorConfig.length == []){
-        fetch('https://ctd-todo-api.herokuapp.com/v1/users/login', requestConfiguration).then(
-
-        response => {
-            console.log(response)
-            if (response.ok){
-            response.json().then(
-
-                data => {
-
-                    localStorage.setItem('token', data.jwt)
-                    window.location.href = './tarefas.html'
-                    
-                    
-                }
-                
-                )
-            }else if(response.status > 300 || response.status < 200){
-                
-                
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: 'Your user or your password have been incorrect',
-                    showConfirmButton: false,
-                    timer: 2500
-                  })
-
-            }else{
-
-            }
-            
-        }
-        
-        )
-    }else {
-        errorConfig = []
-    }
-    
+    };
+    return fetch('https://ctd-todo-api.herokuapp.com/v1/users/login', requestConfiguration)
+        .then(T => T.json());
 }
-    errorMaster()
-})
+validityLogin();
+loginButtonRef.addEventListener('click', event => {
+    event.preventDefault();
+    sendLogin(inputsReference)
+        .then(data => {
+            userOk();
+            localStorage.setItem('token', data.jwt);
+            window.location.href = './tarefas.html';
+        })
+        .catch(error => {
+            userError();
+        });
+});

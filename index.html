@@ -11,11 +11,8 @@
   <link rel="stylesheet" href="styles/acesso.css">
 
  <!-- ----------------------------- sweet alert ----------------------------- -->
- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
- <script src="sweetalert2.all.min.js"></script>
-
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 <!-- ---------------------- lógica aplicada no registro -------------------- -->
 </head>
 
@@ -34,18 +31,15 @@
 
       <label>
         Email:
-        <input id="inputEmail" type="text">
-        <p id="errorEmail" class="error"></p>
+        <input id="inputEmail" type="email" required>
+        <span aria-live="polite" hidden>Por favor insira um endereço de email válido</span>
       </label>
       <label>
-        Senha:
-        <input id="inputPassword" type="password">
-        <p id="errorPassword" class="error"></p>
+          Senha:
+          <input id="inputPassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" maxlength="12" required>
+        <span  aria-live="polite" hidden>Sua senha precisa ter entre 6 e 12 caracteres e conter uma letra maiúscula, uma letra minúscula e um número</span>
       </label>
-
-      <button type="submit" id="loginButton">Acessar</button>
-      <p class="msgSuccess" id="userSuccess"></p>
-
+      <button type="submit" id="loginButton" disabled>Acessar</button>
     </form>
     <div class="ingressar">
       <a href="signup.html">Não possui conta? Crie agora mesmo</a>

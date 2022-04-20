@@ -82,7 +82,7 @@ signupButtonRef.addEventListener('click', event => {
     event.preventDefault();
     sendSignUp(inputsReference)
         .then(data => {
-            userOk();
+            setTimeout(() => userOk(), 3000);
             localStorage.setItem('token', data.jwt);
             window.location.href = './tarefas.html';
         })

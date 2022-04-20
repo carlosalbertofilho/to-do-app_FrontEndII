@@ -7,11 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ----------------------------- estilos CSS ----------------------------- -->
   <link rel="stylesheet" href="./styles/tarefas.css">
-
+  <!-- CDN example (unpkg) -->
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  
-  
+  <!-- ----------------------------- sweet alert ----------------------------- -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
   <title>To-Do App</title>
 </head>
 
@@ -20,17 +21,14 @@
     <nav>
       <a href="#">Tarefas</a>
     </nav>
-    
     <div class="user-info">
       <p>Nome usuário</p>
       <div class="user-image"><img id="imageUser" src="" alt="">
-      </div>      
+      </div>
       <p id="closeApp">Finalizar sessão</i>
       </p>
     </div>
   </header>
-  
-  
   <form class="nova-tarefa">
     <div class="not-done "></div>
     <input id="newTask" type="text" placeholder="Nova tarefa">
@@ -38,10 +36,8 @@
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>
-
-
   <ul class="tarefas-pendentes">
-    <div id="tasks"></div> 
+    <div id="tasks"></div>
     <div id="skeleton">
       <li class="tarefa">
         <div class="not-done"></div>
@@ -68,33 +64,20 @@
 
     </div>
   </ul>
-  
   <h2 class="titulo-terminadas">Tarefas terminadas</h2>
   <ul class="tarefas-terminadas">
-    <div id="tasksFinished"></div> 
-    
+    <div id="tasksFinished"></div>
   </ul>
   <!-- ------------------- Biblioteca de icones - Fontawesome -------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
      AOS.init()
   </script>
   <script src="scripts/tarefas.js"></script>
-  <!-- ----------------------------- sweet alert ----------------------------- -->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <!-- <script src="sweetalert2.all.min.js"></script> -->
-  
-  <!-- CDN example (unpkg) -->
-  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-  
-  
-  
 </body>
 
 </html>
